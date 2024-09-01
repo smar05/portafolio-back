@@ -1,11 +1,10 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import homeRoutes from "./routes";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to backend portfolio!");
-});
+app.use("/api", homeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
