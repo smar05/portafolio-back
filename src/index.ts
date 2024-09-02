@@ -1,11 +1,12 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import dbRoutes from "./routes/db-routes";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to backend portfolio!");
-});
+app.use(cors());
+app.use("/db", dbRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
