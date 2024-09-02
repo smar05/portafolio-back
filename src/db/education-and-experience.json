@@ -1,0 +1,49 @@
+{
+  "backTitle": "Quality",
+  "title": "Education & Expericence",
+  "educationSection": {
+    "title": "My Education",
+    "education": [
+      {
+        "name": "Electronic Engineer",
+        "school": "Distrital Francisco José de Caldas University",
+        "begin": "2016",
+        "end": "2024"
+      },
+      {
+        "name": "Full Stack Web Programming",
+        "school": "Distrital Francisco José de Caldas University",
+        "begin": "Jul 2021",
+        "end": "Jun 2022",
+        "description": "Create websites and web systems using programming languages (HTML, CSS, JavaScript, React, Mongo DB, Node.js andmore)."
+      },
+      {
+        "name": "Programming skills training program. Emphasis on web applications, ComputerSoftware and Media Applications",
+        "school": "Antioquia University",
+        "begin": "Mar 2021",
+        "end": "Jan 2022",
+        "description": "Diploma in programming skills oriented to web development. Train in programming, to face the challenges of the Fourth Industrial Revolution."
+      }
+    ]
+  },
+  "experienceSection": {
+    "title": "My Expericence",
+    "experience": [
+      {
+        "name": "Semi-Senior Fullstack Developer | IBM (for the Bank Davivienda client)",
+        "company": "Cinte | IBM",
+        "begin": "Jul 2023",
+        "end": "May 2024",
+        "time": "(11 Months)",
+        "description": "<ul><li>Participate in the development of web pages for Banco Davivienda, using technologies such asAngular, Node.js, Git and Google Cloud Platform (GCP).</li><li>Collaborated closely with multidisciplinary teams to ensure the creation of intuitive and secureinterfaces that met client needs.</li><li>Contributed to the success of key projects in a top-level business environment, contributing myexperience and technical skills to meet established objectives.</li><li>Participated in process optimization and implementation of best practices.</li></ul>"
+      },
+      {
+        "name": "Software Developer",
+        "company": "Softtek",
+        "begin": "Aug 2021",
+        "end": "Jul 2023",
+        "description": "<ul><li>Contribution in projects of various public and private clients</li><li>I mainly used tools such as Angular, Spring boot, Sql, AWS, Docker, Git, among others.</li><li>I managed to make great contributions to provide maintenance and new functionalities to variousprojects that were assigned to me.</li></ul>"
+      }
+    ]
+  }
+}
