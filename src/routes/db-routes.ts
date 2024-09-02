@@ -5,7 +5,7 @@ import {
   educationAndExperience,
   mySkills,
   presentation,
-} from "../controllers/home.controller";
+} from "../controllers/db.controller";
 
 const router = Router();
 
