@@ -7,4 +7,5 @@ export interface IPresentation {
     url: string;
     text: string;
   };
+  last: boolean;
 }
