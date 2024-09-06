@@ -22,4 +22,5 @@ export interface IeducationAndExperience {
       description: string;
     }[];
   };
+  last: boolean;
 }
