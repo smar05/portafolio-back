@@ -7,4 +7,5 @@ export interface Icontact {
   placeholderMessage: string;
   textSubmit: string;
   myEmail: string;
+  last: boolean;
 }

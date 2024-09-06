@@ -12,5 +12,5 @@ WORKDIR /app
 COPY --from=builder /app/build ./build
 COPY package*.json ./
 RUN npm install --only=production
-EXPOSE 8080
+EXPOSE 5000
 CMD ["node", "build/index.js"]

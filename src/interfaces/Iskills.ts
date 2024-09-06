@@ -9,4 +9,5 @@ export interface Iskills {
     title: string;
     data: { name: string; percentage: number; color: string }[];
   };
+  last: boolean;
 }

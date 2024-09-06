@@ -10,4 +10,5 @@ export interface IaboutMe {
   phone: string;
   email: string;
   freelance: string;
+  last: boolean;
 }
