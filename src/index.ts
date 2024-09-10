@@ -1,7 +1,8 @@
-import express from "express";
-import dbRoutes from "./routes/db-routes";
 import cors from "cors";
+import express from "express";
 import { connectDB } from "./db/mongo";
+import dbRoutes from "./routes/db-routes";
+import setupSwagger from "./swagger";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -12,6 +13,8 @@ const startApp = async () => {
   await connectDB();
 
   app.use("/db", dbRoutes);
+  // Configuración de Swagger
+  setupSwagger(app);
 };
 
 startApp();
