@@ -7,6 +7,7 @@ import {
   educationAndExperienceEdit,
   login,
   mySkills,
+  mySkillsEdit,
   presentation,
   presentationEdit,
 } from "../controllers/db.controller";
@@ -379,5 +380,6 @@ router.post("/login", login);
 router.put("/presentation/:id", auth, presentationEdit);
 router.put("/about-me/:id", auth, aboutMeEdit);
 router.put("/education-and-experience/:id", auth, educationAndExperienceEdit);
+router.put("/my-skills/:id", auth, mySkillsEdit);
 
 export default router;
