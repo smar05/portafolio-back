@@ -162,3 +162,25 @@ export const mySkillsEdit = async (req: Request, res: Response) => {
 
   res.json({ message: "Finalizado con exito" }).status(200);
 };
+
+export const contactMeEdit = async (req: Request, res: Response) => {
+  const id: string = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "ID inválido" });
+  }
+
+  const bodyContact: Icontact = req.body;
+
+  try {
+    await EducationAndExperience.findByIdAndUpdate(id, {
+      ...bodyContact,
+      last: true,
+    });
+  } catch (error) {
+    console.log("🚀 ~ contactMeEdit ~ error:", error);
+    res.status(500).json({ message: "Error en el servidor" });
+  }
+
+  res.json({ message: "Finalizado con exito" }).status(200);
+};
