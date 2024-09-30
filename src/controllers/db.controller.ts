@@ -93,3 +93,25 @@ export const presentationEdit = async (req: Request, res: Response) => {
 
   res.json({ message: "Finalizado con exito" }).status(200);
 };
+
+export const aboutMeEdit = async (req: Request, res: Response) => {
+  const id: string = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "ID inválido" });
+  }
+
+  const bodyAboutMe: IaboutMe = req.body;
+
+  try {
+    await AboutMe.findByIdAndUpdate(id, {
+      ...bodyAboutMe,
+      last: true,
+    });
+  } catch (error) {
+    console.log("🚀 ~ aboutMeEdit ~ error:", error);
+    res.status(500).json({ message: "Error en el servidor" });
+  }
+
+  res.json({ message: "Finalizado con exito" }).status(200);
+};

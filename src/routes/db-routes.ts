@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   aboutMe,
+  aboutMeEdit,
   contactMe,
   educationAndExperience,
   login,
@@ -375,5 +376,6 @@ router.get("/contact-me", contactMe);
 router.post("/login", login);
 
 router.put("/presentation/:id", auth, presentationEdit);
+router.put("/about-me/:id", auth, aboutMeEdit);
 
 export default router;
