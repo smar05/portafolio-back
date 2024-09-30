@@ -4,6 +4,7 @@ import {
   aboutMeEdit,
   contactMe,
   educationAndExperience,
+  educationAndExperienceEdit,
   login,
   mySkills,
   presentation,
@@ -377,5 +378,6 @@ router.post("/login", login);
 
 router.put("/presentation/:id", auth, presentationEdit);
 router.put("/about-me/:id", auth, aboutMeEdit);
+router.put("/education-and-experience/:id", auth, educationAndExperienceEdit);
 
 export default router;
