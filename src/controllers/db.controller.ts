@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import { AboutMe } from "../db/schemas/AboutMe";
 import { Contact } from "../db/schemas/Contact";
 import { EducationAndExperience } from "../db/schemas/EducationAndExperience";
@@ -12,6 +13,7 @@ import { Icontact } from "../interfaces/Icontact";
 import { IeducationAndExperience } from "../interfaces/IeducationAndExperience";
 import { IPresentation } from "../interfaces/Ipresentation";
 import { Iskills } from "../interfaces/Iskills";
+const { ObjectId } = mongoose.Types;
 
 export const presentation = async (req: Request, res: Response) => {
   const data: IPresentation = (await Presentation.findOne({
@@ -68,4 +70,26 @@ export const login = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" });
   }
+};
+
+export const presentationEdit = async (req: Request, res: Response) => {
+  const id: string = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "ID inválido" });
+  }
+
+  const bodyPresentation: IPresentation = req.body;
+
+  try {
+    await Presentation.findByIdAndUpdate(id, {
+      ...bodyPresentation,
+      last: true,
+    });
+  } catch (error) {
+    console.log("🚀 ~ presentationEdit ~ error:", error);
+    res.status(500).json({ message: "Error en el servidor" });
+  }
+
+  res.json({ message: "Finalizado con exito" }).status(200);
 };

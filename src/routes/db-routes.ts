@@ -6,7 +6,9 @@ import {
   login,
   mySkills,
   presentation,
+  presentationEdit,
 } from "../controllers/db.controller";
+import auth from "../middleware/auth";
 
 const router = Router();
 
@@ -369,6 +371,9 @@ router.get("/my-skills", mySkills);
  *               $ref: '#/components/schemas/Contact'
  */
 router.get("/contact-me", contactMe);
+
 router.post("/login", login);
+
+router.put("/presentation/:id", auth, presentationEdit);
 
 export default router;
