@@ -3,6 +3,7 @@ import {
   aboutMe,
   contactMe,
   educationAndExperience,
+  login,
   mySkills,
   presentation,
 } from "../controllers/db.controller";
@@ -368,5 +369,6 @@ router.get("/my-skills", mySkills);
  *               $ref: '#/components/schemas/Contact'
  */
 router.get("/contact-me", contactMe);
+router.post("/login", login);
 
 export default router;
