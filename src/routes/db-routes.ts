@@ -11,6 +11,7 @@ import {
   mySkillsEdit,
   presentation,
   presentationEdit,
+  validateToken,
 } from "../controllers/db.controller";
 import auth from "../middleware/auth";
 
@@ -377,6 +378,7 @@ router.get("/my-skills", mySkills);
 router.get("/contact-me", contactMe);
 
 router.post("/login", login);
+router.post("/validate-token", validateToken);
 
 router.put("/presentation/:id", auth, presentationEdit);
 router.put("/about-me/:id", auth, aboutMeEdit);

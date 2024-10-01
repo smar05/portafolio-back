@@ -70,7 +70,7 @@ export const login = async (req: Request, res: Response) => {
     });
     res.json({ token, autenticated: true });
   } catch (error) {
-    res
+    return res
       .status(500)
       .json({ message: "Error en el servidor", autenticated: false });
   }
@@ -92,10 +92,12 @@ export const presentationEdit = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log("🚀 ~ presentationEdit ~ error:", error);
-    res.status(500).json({ message: "Error en el servidor" });
+    return res.status(500).json({ message: "Error en el servidor" });
   }
 
-  res.json({ message: "Finalizado con exito", actualizado: true }).status(200);
+  return res
+    .json({ message: "Finalizado con exito", actualizado: true })
+    .status(200);
 };
 
 export const aboutMeEdit = async (req: Request, res: Response) => {
@@ -114,10 +116,12 @@ export const aboutMeEdit = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log("🚀 ~ aboutMeEdit ~ error:", error);
-    res.status(500).json({ message: "Error en el servidor" });
+    return res.status(500).json({ message: "Error en el servidor" });
   }
 
-  res.json({ message: "Finalizado con exito" }).status(200);
+  return res
+    .json({ message: "Finalizado con exito", actualizado: true })
+    .status(200);
 };
 
 export const educationAndExperienceEdit = async (
@@ -139,10 +143,12 @@ export const educationAndExperienceEdit = async (
     });
   } catch (error) {
     console.log("🚀 ~ educationAndExperienceEdit ~ error:", error);
-    res.status(500).json({ message: "Error en el servidor" });
+    return res.status(500).json({ message: "Error en el servidor" });
   }
 
-  res.json({ message: "Finalizado con exito" }).status(200);
+  return res
+    .json({ message: "Finalizado con exito", actualizado: true })
+    .status(200);
 };
 
 export const mySkillsEdit = async (req: Request, res: Response) => {
@@ -161,10 +167,12 @@ export const mySkillsEdit = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log("🚀 ~ mySkillsEdit ~ error:", error);
-    res.status(500).json({ message: "Error en el servidor" });
+    return res.status(500).json({ message: "Error en el servidor" });
   }
 
-  res.json({ message: "Finalizado con exito" }).status(200);
+  return res
+    .json({ message: "Finalizado con exito", actualizado: true })
+    .status(200);
 };
 
 export const contactMeEdit = async (req: Request, res: Response) => {
@@ -177,14 +185,37 @@ export const contactMeEdit = async (req: Request, res: Response) => {
   const bodyContact: Icontact = req.body;
 
   try {
-    await EducationAndExperience.findByIdAndUpdate(id, {
+    await Contact.findByIdAndUpdate(id, {
       ...bodyContact,
       last: true,
     });
   } catch (error) {
     console.log("🚀 ~ contactMeEdit ~ error:", error);
-    res.status(500).json({ message: "Error en el servidor" });
+    return res.status(500).json({ message: "Error en el servidor" });
   }
 
-  res.json({ message: "Finalizado con exito" }).status(200);
+  return res
+    .json({ message: "Finalizado con exito", actualizado: true })
+    .status(200);
+};
+
+export const validateToken = (req: Request, res: Response) => {
+  const token: string = req.header("Authorization") as string;
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: "Acceso denegado", tokenValido: false });
+  }
+
+  try {
+    const verified = jwt.verify(token, "miSecreto");
+    (req as any).userVerified = verified;
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Token no válido", tokenValido: false });
+  }
+
+  return res.status(200).json({ tokenValido: true });
 };
