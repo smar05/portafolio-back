@@ -50,25 +50,29 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res
-        .status(400)
-        .json({ message: "Usuario o contraseña incorrectos" });
+      return res.status(400).json({
+        message: "Usuario o contraseña incorrectos",
+        autenticated: false,
+      });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     console.log("🚀 ~ login ~ isMatch:", isMatch);
     if (!isMatch) {
-      return res
-        .status(400)
-        .json({ message: "Usuario o contraseña incorrectos" });
+      return res.status(400).json({
+        message: "Usuario o contraseña incorrectos",
+        autenticated: false,
+      });
     }
 
     const token = jwt.sign({ userId: user._id }, "miSecreto", {
       expiresIn: "1h",
     });
-    res.json({ token });
+    res.json({ token, autenticated: true });
   } catch (error) {
-    res.status(500).json({ message: "Error en el servidor" });
+    res
+      .status(500)
+      .json({ message: "Error en el servidor", autenticated: false });
   }
 };
 
@@ -91,7 +95,7 @@ export const presentationEdit = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error en el servidor" });
   }
 
-  res.json({ message: "Finalizado con exito" }).status(200);
+  res.json({ message: "Finalizado con exito", actualizado: true }).status(200);
 };
 
 export const aboutMeEdit = async (req: Request, res: Response) => {

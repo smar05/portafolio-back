@@ -5,7 +5,9 @@ function auth(req: Request, res: Response, next: NextFunction) {
   const token: string = req.header("Authorization") as string;
 
   if (!token) {
-    return res.status(401).json({ message: "Acceso denegado" });
+    return res
+      .status(401)
+      .json({ message: "Acceso denegado", tokenInvalido: true });
   }
 
   try {
@@ -13,7 +15,7 @@ function auth(req: Request, res: Response, next: NextFunction) {
     (req as any).userVerified = verified;
     next();
   } catch (error) {
-    res.status(400).json({ message: "Token no válido" });
+    res.status(400).json({ message: "Token no válido", tokenInvalido: true });
   }
 }
 
