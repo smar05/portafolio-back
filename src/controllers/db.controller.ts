@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import path from "path";
 import { AboutMe } from "../db/schemas/AboutMe";
 import { Contact } from "../db/schemas/Contact";
 import { EducationAndExperience } from "../db/schemas/EducationAndExperience";
@@ -13,7 +14,6 @@ import { Icontact } from "../interfaces/Icontact";
 import { IeducationAndExperience } from "../interfaces/IeducationAndExperience";
 import { IPresentation } from "../interfaces/Ipresentation";
 import { Iskills } from "../interfaces/Iskills";
-import path from "path";
 const { ObjectId } = mongoose.Types;
 
 export const imgPresentation = (_req: Request, res: Response) => {
@@ -78,7 +78,15 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-    const token = jwt.sign({ userId: user._id }, "miSecreto", {
+    const JWT_SECRET: string | undefined = process.env.JWT_SECRET;
+
+    if (!JWT_SECRET) {
+      return res
+        .status(500)
+        .json({ message: "Error en el servidor", autenticated: false });
+    }
+
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
     res.json({ token, autenticated: true });

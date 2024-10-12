@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
 import path from "path";
@@ -10,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const startApp = async () => {
+  dotenv.config();
   app.use(cors());
   app.use(morgan("dev")); // Para mostrar por consola las peticiones http
   app.use(bodyParser.json());
