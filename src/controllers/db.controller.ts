@@ -65,16 +65,15 @@ export const login = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(400).json({
         message: "Usuario o contraseña incorrectos",
-        autenticated: false,
+        authenticated: false,
       });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("🚀 ~ login ~ isMatch:", isMatch);
     if (!isMatch) {
       return res.status(400).json({
         message: "Usuario o contraseña incorrectos",
-        autenticated: false,
+        authenticated: false,
       });
     }
 
@@ -89,11 +88,20 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.json({ token, autenticated: true });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 3600000,
+    });
+
+    return res.status(200).json({ authenticated: true });
   } catch (error) {
+    console.error("Error en el inicio de sesión:", error);
     return res
       .status(500)
-      .json({ message: "Error en el servidor", autenticated: false });
+      .json({ message: "Error en el servidor", authenticated: false });
   }
 };
 
@@ -221,7 +229,7 @@ export const contactMeEdit = async (req: Request, res: Response) => {
 };
 
 export const validateToken = (req: Request, res: Response) => {
-  const token: string = req.header("Authorization") as string;
+  const token: string | undefined = req.cookies.token;
 
   if (!token) {
     return res
@@ -230,13 +238,12 @@ export const validateToken = (req: Request, res: Response) => {
   }
 
   try {
-    const verified = jwt.verify(token, "miSecreto");
+    const verified = jwt.verify(token, process.env.JWT_SECRET as string);
     (req as any).userVerified = verified;
+    return res.status(200).json({ tokenValido: true });
   } catch (error) {
     return res
       .status(400)
       .json({ message: "Token no válido", tokenValido: false });
   }
-
-  return res.status(200).json({ tokenValido: true });
 };

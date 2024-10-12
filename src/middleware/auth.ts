@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 function auth(req: Request, res: Response, next: NextFunction) {
-  const token: string = req.header("Authorization") as string;
+  const token: string | undefined = req.cookies.token;
 
   if (!token) {
     return res
@@ -11,8 +11,8 @@ function auth(req: Request, res: Response, next: NextFunction) {
   }
 
   try {
-    const verified = jwt.verify(token, "miSecreto");
-    (req as any).userVerified = verified;
+    const verified = jwt.verify(token, process.env.JWT_SECRET as string);
+    (req as any).userVerified = verified; // Guarda el usuario verificado en la request
     next();
   } catch (error) {
     res.status(400).json({ message: "Token no válido", tokenInvalido: true });
