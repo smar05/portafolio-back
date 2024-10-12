@@ -161,7 +161,7 @@ export const mySkillsEdit = async (req: Request, res: Response) => {
   const bodySkills: Iskills = req.body;
 
   try {
-    await EducationAndExperience.findByIdAndUpdate(id, {
+    await Skills.findByIdAndUpdate(id, {
       ...bodySkills,
       last: true,
     });
