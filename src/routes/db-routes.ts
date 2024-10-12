@@ -6,6 +6,7 @@ import {
   contactMeEdit,
   educationAndExperience,
   educationAndExperienceEdit,
+  imgPresentation,
   login,
   mySkills,
   mySkillsEdit,
@@ -16,6 +17,8 @@ import {
 import auth from "../middleware/auth";
 
 const router = Router();
+
+router.get("/image/presentation", imgPresentation);
 
 /**
  * @swagger

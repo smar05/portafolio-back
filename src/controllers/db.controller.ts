@@ -13,7 +13,20 @@ import { Icontact } from "../interfaces/Icontact";
 import { IeducationAndExperience } from "../interfaces/IeducationAndExperience";
 import { IPresentation } from "../interfaces/Ipresentation";
 import { Iskills } from "../interfaces/Iskills";
+import path from "path";
 const { ObjectId } = mongoose.Types;
+
+export const imgPresentation = (_req: Request, res: Response) => {
+  const imagePath: string = path.join(
+    __dirname,
+    "..",
+    "public",
+    "img",
+    "profile.png"
+  );
+
+  res.sendFile(imagePath);
+};
 
 export const presentation = async (req: Request, res: Response) => {
   const data: IPresentation = (await Presentation.findOne({

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && copyfiles -u 1 src/db/*.json build/",
+    "build": "tsc && copyfiles -u 1 src/public/**/* build",
     "start": "node build/index.js",
     "dev": "concurrently \"tsc -w\" \"nodemon build/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
