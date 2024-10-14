@@ -8,6 +8,7 @@ import {
   educationAndExperienceEdit,
   imgPresentation,
   login,
+  logout,
   mySkills,
   mySkillsEdit,
   presentation,
@@ -381,6 +382,7 @@ router.get("/my-skills", mySkills);
 router.get("/contact-me", contactMe);
 
 router.post("/login", login);
+router.post("/logout", logout);
 router.post("/validate-token", validateToken);
 
 router.put("/presentation/:id", auth, presentationEdit);

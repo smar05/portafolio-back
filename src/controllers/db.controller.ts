@@ -105,6 +105,11 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const logout = (_req: Request, res: Response) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logout successful" });
+};
+
 export const presentationEdit = async (req: Request, res: Response) => {
   const id: string = req.params.id;
 
