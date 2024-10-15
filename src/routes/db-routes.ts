@@ -1,13 +1,25 @@
 import { Router } from "express";
 import {
   aboutMe,
+  aboutMeEdit,
   contactMe,
+  contactMeEdit,
   educationAndExperience,
+  educationAndExperienceEdit,
+  imgPresentation,
+  login,
+  logout,
   mySkills,
+  mySkillsEdit,
   presentation,
+  presentationEdit,
+  validateToken,
 } from "../controllers/db.controller";
+import auth from "../middleware/auth";
 
 const router = Router();
+
+router.get("/image/presentation", imgPresentation);
 
 /**
  * @swagger
@@ -368,5 +380,15 @@ router.get("/my-skills", mySkills);
  *               $ref: '#/components/schemas/Contact'
  */
 router.get("/contact-me", contactMe);
+
+router.post("/login", login);
+router.post("/logout", logout);
+router.post("/validate-token", validateToken);
+
+router.put("/presentation/:id", auth, presentationEdit);
+router.put("/about-me/:id", auth, aboutMeEdit);
+router.put("/education-and-experience/:id", auth, educationAndExperienceEdit);
+router.put("/my-skills/:id", auth, mySkillsEdit);
+router.put("/contact-me/:id", auth, contactMeEdit);
 
 export default router;
