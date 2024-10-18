@@ -13,7 +13,6 @@ const experienceSchema = new Schema({
   company: { type: String, required: true },
   begin: { type: String, required: true },
   end: { type: String, required: true },
-  time: { type: String, required: false },
   description: { type: String, required: false },
 });
 
