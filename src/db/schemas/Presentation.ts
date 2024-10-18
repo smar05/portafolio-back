@@ -11,7 +11,6 @@ const videoSchema = new Schema({
 });
 
 const presentationSchema = new Schema({
-  profileImg: { type: String, required: true },
   name: { type: String, required: true },
   tags: { type: String, required: true },
   hv: { type: hvSchema, required: true },

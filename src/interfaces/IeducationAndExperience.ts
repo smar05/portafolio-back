@@ -18,7 +18,6 @@ export interface IeducationAndExperience {
       company: string;
       begin: string;
       end: string;
-      time: string;
       description: string;
     }[];
   };
