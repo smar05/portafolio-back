@@ -258,3 +258,12 @@ export const validateToken = (req: Request, res: Response) => {
       .json({ message: "Token no válido", tokenValido: false });
   }
 };
+
+export const uploadImage = async (_req: Request, res: Response) => {
+  try {
+    res.json({ message: "Image updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
